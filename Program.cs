@@ -28,8 +28,34 @@ void PrintArray(int[,] arr)
             else Console.Write($"{arr[i,j]}, ");
         }
         Console.WriteLine("]");
+    }    
+}
+int[] MinRow(int[,] arr)
+{
+    int min = arr.GetLength(1) * 10;
+    int minIndex = 0;
+    for (int i = 0; i < arr.GetLength(0); i++)
+    {
+        int sum = 0;
+        for (int j = 0; j < arr.GetLength(1); j++)
+        {
+            sum += arr[i,j];
+        }
+        if (sum < min)
+        {
+            min = sum;
+            minIndex = i;
+        }
     }
-        
+    int[] result = new int[arr.GetLength(1)];
+    for (int i = 0; i < result.Length; i++)
+    {
+        result[i] = arr[minIndex, i];
+    } 
+    return result;
 }
 int[,] array = FillArray(4, 5, 1, 10);
 PrintArray(array);
+int[] res = MinRow(array);
+Console.WriteLine();
+Console.WriteLine($"[{String.Join(", ", res)}]");
